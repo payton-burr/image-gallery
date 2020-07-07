@@ -106,4 +106,8 @@ header h2 {
   .gallery-info {
     justify-content: space-evenly;
   }
+
+  .search-form {
+    padding: 1rem;
+  }
 }
