@@ -97,3 +97,9 @@ header h2 {
   font-size: 2rem;
   padding: 2rem 0rem;
 }
+
+@media only screen and (max-width: 430px) {
+  .gallery {
+    width: 90%;
+  }
+}
