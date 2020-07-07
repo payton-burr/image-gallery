@@ -3,6 +3,7 @@ const gallery = document.querySelector('.gallery');
 const searchInput = document.querySelector('.search-input');
 const form = document.querySelector('.search-form');
 const more = document.querySelector('.more');
+const main = document.querySelector('main');
 let currentSearch;
 let fetchLink;
 let page = 1;
@@ -63,7 +64,15 @@ async function searchPhoto(query) {
   clear();
   fetchLink = `https://api.pexels.com/v1/search?query=${query}+query&per_page=15&page=1`;
   const data = await fetchApi(fetchLink);
-  generate(data);
+  if (data.total_results === 0) {
+    const resultText = document.createElement('div');
+    resultText.classList.add('result-text');
+    resultText.innerText = 'Nothing found, try again :)';
+    main.appendChild(resultText);
+  } else {
+    generate(data);
+    main.children[1].remove();
+  }
 }
 
 function clear() {
