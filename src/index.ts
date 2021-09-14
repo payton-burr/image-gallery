@@ -1,13 +1,13 @@
-const auth = '563492ad6f9170000100000180543d2a83114fb3a74dc663d43f3d53';
-const gallery = document.querySelector('.gallery');
-const searchInput = document.querySelector('.search-input');
-const form = document.querySelector('.search-form');
-const more = document.querySelector('.more');
-const main = document.querySelector('main');
-let currentSearch;
-let fetchLink;
-let page = 1;
-let searchValue;
+const auth: string = '563492ad6f9170000100000180543d2a83114fb3a74dc663d43f3d53';
+const gallery: HTMLDivElement = document.querySelector('.gallery');
+const searchInput: HTMLInputElement = document.querySelector('.search-input');
+const form: HTMLFormElement = document.querySelector('.search-form');
+const more: HTMLButtonElement = document.querySelector('.more');
+const main: HTMLElement = document.querySelector('main');
+let currentSearch: string;
+let fetchLink: string;
+let page: number = 1;
+let searchValue: string;
 
 // Event listeners
 
