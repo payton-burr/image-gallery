@@ -18,6 +18,7 @@ form.addEventListener('submit', (e) => {
     currentSearch = searchValue;
     searchPhoto(searchValue);
 });
+// Functions
 async function fetchApi(url) {
     const dataFetch = await fetch(url, {
         method: 'GET',
@@ -79,3 +80,4 @@ async function loadMore() {
     generate(data);
 }
 curatedPhotos();
+export {};

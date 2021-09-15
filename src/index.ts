@@ -1,3 +1,5 @@
+import { FetchObject } from './types';
+
 const auth: string = '563492ad6f9170000100000180543d2a83114fb3a74dc663d43f3d53';
 const gallery: HTMLDivElement = document.querySelector('.gallery');
 const searchInput: HTMLInputElement = document.querySelector('.search-input');
@@ -24,14 +26,6 @@ form.addEventListener('submit', (e: Event) => {
 });
 
 // Functions
-
-type FetchObject = {
-  next_page: string;
-  page: number;
-  per_page: number;
-  photos: [];
-  total_results: number;
-};
 
 async function fetchApi(url: string): Promise<FetchObject> {
   const dataFetch: Response = await fetch(url, {
