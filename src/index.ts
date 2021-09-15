@@ -13,8 +13,11 @@ let searchValue: string;
 
 more.addEventListener('click', loadMore);
 
-searchInput.addEventListener('input', updateInput);
-form.addEventListener('submit', (e) => {
+searchInput.addEventListener('input', (e: Event) => {
+  searchValue = (e.target as HTMLInputElement).value;
+});
+
+form.addEventListener('submit', (e: Event) => {
   e.preventDefault();
   currentSearch = searchValue;
   searchPhoto(searchValue);
@@ -22,8 +25,16 @@ form.addEventListener('submit', (e) => {
 
 // Functions
 
-async function fetchApi(url) {
-  const dataFetch = await fetch(url, {
+type FetchObject = {
+  next_page: string;
+  page: number;
+  per_page: number;
+  photos: [];
+  total_results: number;
+};
+
+async function fetchApi(url: string): Promise<FetchObject> {
+  const dataFetch: Response = await fetch(url, {
     method: 'GET',
     headers: {
       Accept: 'application/json',
@@ -31,8 +42,7 @@ async function fetchApi(url) {
     },
   });
 
-  const data = await dataFetch.json();
-  return data;
+  return (await dataFetch.json()) as Promise<FetchObject>;
 }
 
 function generate(data) {
@@ -50,10 +60,6 @@ function generate(data) {
   });
 }
 
-function updateInput(e) {
-  searchValue = e.target.value;
-}
-
 async function curatedPhotos() {
   fetchLink = 'https://api.pexels.com/v1/curated?per_page&page=1';
   const data = await fetchApi(fetchLink);
@@ -64,6 +70,7 @@ async function searchPhoto(query) {
   clear();
   fetchLink = `https://api.pexels.com/v1/search?query=${query}+query&per_page=15&page=1`;
   const data = await fetchApi(fetchLink);
+  console.log(data);
   if (data.total_results === 0) {
     const resultText = document.createElement('div');
     resultText.classList.add('result-text');

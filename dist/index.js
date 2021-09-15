@@ -10,13 +10,14 @@ let page = 1;
 let searchValue;
 // Event listeners
 more.addEventListener('click', loadMore);
-searchInput.addEventListener('input', updateInput);
+searchInput.addEventListener('input', (e) => {
+    searchValue = e.target.value;
+});
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     currentSearch = searchValue;
     searchPhoto(searchValue);
 });
-// Functions
 async function fetchApi(url) {
     const dataFetch = await fetch(url, {
         method: 'GET',
@@ -25,8 +26,7 @@ async function fetchApi(url) {
             Authorization: auth,
         },
     });
-    const data = await dataFetch.json();
-    return data;
+    return (await dataFetch.json());
 }
 function generate(data) {
     data.photos.forEach((photo) => {
@@ -42,9 +42,6 @@ function generate(data) {
         gallery.appendChild(galleryImg);
     });
 }
-function updateInput(e) {
-    searchValue = e.target.value;
-}
 async function curatedPhotos() {
     fetchLink = 'https://api.pexels.com/v1/curated?per_page&page=1';
     const data = await fetchApi(fetchLink);
@@ -54,6 +51,7 @@ async function searchPhoto(query) {
     clear();
     fetchLink = `https://api.pexels.com/v1/search?query=${query}+query&per_page=15&page=1`;
     const data = await fetchApi(fetchLink);
+    console.log(data);
     if (data.total_results === 0) {
         const resultText = document.createElement('div');
         resultText.classList.add('result-text');
