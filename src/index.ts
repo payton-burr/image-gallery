@@ -39,7 +39,7 @@ async function fetchApi(url: string): Promise<FetchObject> {
   return (await dataFetch.json()) as Promise<FetchObject>;
 }
 
-function generate(data) {
+function generate(data: FetchObject) {
   data.photos.forEach((photo) => {
     const galleryImg = document.createElement('div');
     galleryImg.classList.add('gallery-img');
