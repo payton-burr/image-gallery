@@ -60,7 +60,7 @@ async function curatedPhotos() {
   generate(data);
 }
 
-async function searchPhoto(query) {
+async function searchPhoto(query: string) {
   clear();
   fetchLink = `https://api.pexels.com/v1/search?query=${query}+query&per_page=15&page=1`;
   const data = await fetchApi(fetchLink);
@@ -72,7 +72,6 @@ async function searchPhoto(query) {
     main.appendChild(resultText);
   } else {
     generate(data);
-    main.children[1].remove();
   }
 }
 

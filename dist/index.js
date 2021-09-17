@@ -61,7 +61,6 @@ async function searchPhoto(query) {
     }
     else {
         generate(data);
-        main.children[1].remove();
     }
 }
 function clear() {
